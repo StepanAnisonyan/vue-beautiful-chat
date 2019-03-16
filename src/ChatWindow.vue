@@ -1,15 +1,27 @@
 <template>
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
+      v-if="showUserList"
       :title="title"
       :imageUrl="titleImageUrl"
       :onClose="onClose"
       :colors="colors"
-      @userList="handleUserListToggle"
+      @userList="handleUserListToggle2"
     />
-    <UserList 
+    <Header2
+      v-if="!showUserList"
+      :title="title"
+      :sendUserName="sendUserName"
+      :sendUserFullName="sendUserFullName"
+      :imageUrl="titleImageUrl"
+      :onClose="onClose"
+      :colors="colors"
+      @userList="handleUserListToggle2"
+    />
+    <UserList
       v-if="showUserList"
       :participants="participants"
+      @userList="handleUserListToggle"
     />
     <MessageList
       v-if="!showUserList"
@@ -33,13 +45,16 @@
 
 <script>
 import Header from './Header.vue'
+import Header2 from './Header2.vue'
 import MessageList from './MessageList.vue'
 import UserInput from './UserInput.vue'
 import UserList from './UserList.vue'
 
 export default {
+
   components: {
     Header,
+    Header2,
     MessageList,
     UserInput,
     UserList
@@ -60,6 +75,14 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    sendUserName: {
+        type: String,
+        required: true
+    },
+    sendUserFullName: {
+          type: String,
+        required: true
     },
     titleImageUrl: {
       type: String,
@@ -83,7 +106,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Write a reply'
+      default: 'Написать сообщение'
     },
     showTypingIndicator: {
       type: String,
@@ -104,10 +127,11 @@ export default {
   },
   data() {
     return {
-      showUserList: false
+      showUserList: true
     }
   },
   computed: {
+
     messages() {
       let messages = this.messageList
 
@@ -116,7 +140,10 @@ export default {
   },
   methods: {
     handleUserListToggle(showUserList) {
-      this.showUserList = showUserList
+      this.showUserList = !showUserList
+    },
+    handleUserListToggle2(showUserList) {
+        this.showUserList = true
     },
     getSuggestions(){
       return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
@@ -128,7 +155,7 @@ export default {
 .sc-chat-window {
   width: 370px;
   height: calc(100% - 120px);
-  max-height: 590px;
+  max-height: 500px;
   position: fixed;
   right: 25px;
   bottom: 100px;

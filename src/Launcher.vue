@@ -12,6 +12,8 @@
       :onUserInputSubmit="onMessageWasSent"
       :participants="participants"
       :title="chatWindowTitle"
+      :sendUserName="sendUserName"
+      :sendUserFullName="sendUserFullName"
       :titleImageUrl="titleImageUrl"
       :isOpen="isOpen"
       :onClose="close"
@@ -58,6 +60,14 @@ export default {
       type: String,
       default: () => ''
     },
+    sendUserName: {
+        type: String,
+    default: () => ''
+    },
+    sendUserFullName: {
+        type: String,
+        default: () => ''
+    },
     titleImageUrl: {
       type: String,
       default: () => ''
@@ -76,7 +86,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Write a reply'
+      default: 'Написать сообщение'
     },
     showTypingIndicator: {
       type: String,
@@ -141,9 +151,9 @@ export default {
       }
 
       if (this.participants.length > 1) {
-        return 'You, ' + this.participants[0].name + ' & others'
+        return this.participants[0].name + ' & others'
       } else {
-        return 'You & ' + this.participants[0].name
+        return this.participants[0].name
       }
     }
   },

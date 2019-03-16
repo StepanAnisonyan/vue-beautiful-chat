@@ -69,7 +69,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Write a reply'
+      default: 'Написать сообщение'
     },
     colors: {
       type: Object,
@@ -157,6 +157,7 @@ export default {
 }
 
 .sc-user-input--text {
+  cursor: text;
   width: 300px;
   resize: none;
   border: none;

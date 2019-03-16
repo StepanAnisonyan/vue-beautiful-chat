@@ -136,6 +136,9 @@ export default {
   white-space: pre-wrap;
   -webkit-font-smoothing: subpixel-antialiased
 }
+.sc-message--text p{
+  margin-bottom: 7px;
+}
 .sc-message--content.sent .sc-message--text {
   color: white;
   background-color: #4e8cff;

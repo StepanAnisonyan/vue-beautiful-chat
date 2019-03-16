@@ -1,7 +1,7 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
-    <div class="sc-header--title" @click="toggleUserList"> {{title}} </div>
+    <div class="sc-header--title">  </div>
     <div class="sc-header--close-button" @click="onClose">
       <img src="./assets/close-icon.png" alt="" />
     </div>
@@ -28,10 +28,6 @@ export default {
     }
   },
   methods: {
-    toggleUserList() {
-      this.inUserList = !this.inUserList
-      this.$emit("userList", this.inUserList)
-    }
   },
   data() {
     return {
@@ -63,14 +59,8 @@ export default {
   padding: 10px;
   flex: 1;
   user-select: none;
-  cursor: pointer;
   border-radius: 5px;
 }
-
-.sc-header--title:hover {
-  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, .1);
-}
-
 .sc-header--close-button {
   width: 40px;
   align-self: center;
